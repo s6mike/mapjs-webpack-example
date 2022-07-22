@@ -1,3 +1,2 @@
-node_modules
-site
-src/example-map.json
+mapjs/node_modules
+mapjs/site
