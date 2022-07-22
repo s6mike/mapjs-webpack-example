@@ -1,9 +1,17 @@
 /*global require, document, window, console */
+
 const MAPJS = require('mindmup-mapjs'),
 	jQuery = require('jquery'),
 	themeProvider = require('./theme'),
 	ThemeProcessor = require('mindmup-mapjs-layout').ThemeProcessor,
-	testMap = require('./example-map'),
+
+	// TODO: Use this as default value for backwards compatibility?
+	// testMap = require('./example-map'),
+
+	// Takes value passed in from command line e.g.
+	//   npm run pack-js -- --env.input_map=../examples/example-map.json
+	testMap = require(process.env.input_map),
+
 	content = require('mindmup-mapjs-model').content,
 	init = function () {
 		'use strict';
@@ -16,12 +24,12 @@ const MAPJS = require('mindmup-mapjs'),
 			return this.each(function () {
 				mapModel.addEventListener('attachmentOpened', function (nodeId, attachment) {
 					mapModel.setAttachment(
-							'attachmentEditorWidget',
-							nodeId, {
-								contentType: 'text/html',
-								content: window.prompt('attachment', attachment && attachment.content)
-							}
-							);
+						'attachmentEditorWidget',
+						nodeId, {
+						contentType: 'text/html',
+						content: window.prompt('attachment', attachment && attachment.content)
+					}
+					);
 				});
 			});
 		};
